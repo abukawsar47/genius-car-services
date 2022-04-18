@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import google from '../../../images/social/google.png';
 import facebook from '../../../images/social/facebook.png';
 import github from '../../../images/social/github.png';
@@ -11,10 +11,15 @@ const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
     const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
     const navigate = useNavigate();
-    
-    let errorElement;
 
-    if(loading || loading1){
+    let errorElement;
+    useEffect(() => {
+        if (user || user1) {
+            navigate('/home');
+        }
+    }, [user, user1])
+
+    if (loading || loading1) {
         return <Loading></Loading>
     }
 
@@ -22,9 +27,7 @@ const SocialLogin = () => {
         errorElement = <p className='text-danger'>Error: {error?.message} {error1?.message}</p>
     }
 
-    if (user || user1) {
-        navigate('/home');
-    }
+
 
     return (
         <div>
