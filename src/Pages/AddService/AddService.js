@@ -2,10 +2,10 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 
 const AddService = () => {
-
     const { register, handleSubmit } = useForm();
+    
     const onSubmit = data => {
-        console.log(data)
+        console.log(data);
         const url = `http://localhost:5000/service`;
         fetch(url, {
             method: 'POST',
@@ -14,11 +14,12 @@ const AddService = () => {
             },
             body: JSON.stringify(data)
         })
-            .then(res => res.json())
-            .then(result => {
-                console.log(result);
-            })
+        .then(res=> res.json())
+        .then(result =>{
+            console.log(result);
+        } )
     };
+
 
     return (
         <div className='w-50 mx-auto'>
@@ -28,7 +29,7 @@ const AddService = () => {
                 <textarea className='mb-2' placeholder='Description' {...register("description")} />
                 <input className='mb-2' placeholder='Price' type="number" {...register("price")} />
                 <input className='mb-2' placeholder='Photo URL' type="text" {...register("img")} />
-                <input className='btn-primary' type="submit" value="Add Service" />
+                <input type="submit" value="Add Service" />
             </form>
         </div>
     );
